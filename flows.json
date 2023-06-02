@@ -8,6 +8,43 @@
         "env": []
     },
     {
+        "id": "39e4fb73aa42796c",
+        "type": "mqtt-broker",
+        "name": "Axnet IoT Server Internal",
+        "broker": "209.73.89.49",
+        "port": "21883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f31d2d9ba3bb06bc",
+        "type": "mongodb",
+        "hostname": "mongodb",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "umn_sensor_data",
+        "name": ""
+    },
+    {
         "id": "1922ddfa6773f0b5",
         "type": "mqtt in",
         "z": "4f1a407d6e44972c",
@@ -218,7 +255,7 @@
         "z": "4f1a407d6e44972c",
         "mongodb": "f31d2d9ba3bb06bc",
         "name": "",
-        "collection": "stpaul_pressure",
+        "collection": "umn_sensor_data",
         "payonly": true,
         "upsert": false,
         "multi": false,
@@ -270,8 +307,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 140,
-        "y": 420,
+        "x": 120,
+        "y": 540,
         "wires": [
             [
                 "0815dde29568c49e"
@@ -291,8 +328,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
-        "y": 500,
+        "x": 100,
+        "y": 620,
         "wires": [
             [
                 "0815dde29568c49e"
@@ -312,8 +349,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 170,
-        "y": 580,
+        "x": 150,
+        "y": 700,
         "wires": [
             [
                 "0815dde29568c49e"
@@ -332,45 +369,18 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 540,
-        "y": 420,
+        "x": 560,
+        "y": 620,
         "wires": []
     },
     {
-        "id": "39e4fb73aa42796c",
-        "type": "mqtt-broker",
-        "name": "Axnet IoT Server Internal",
-        "broker": "209.73.89.49",
-        "port": "21883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "f31d2d9ba3bb06bc",
-        "type": "mongodb",
-        "hostname": "mongodb",
-        "topology": "direct",
-        "connectOptions": "",
-        "port": "27017",
-        "db": "umn_sensor_data",
-        "name": ""
+        "id": "4d61607516311242",
+        "type": "comment",
+        "z": "4f1a407d6e44972c",
+        "name": "Furture Use",
+        "info": "",
+        "x": 90,
+        "y": 500,
+        "wires": []
     }
 ]
