@@ -19,7 +19,7 @@ jobs:
       run:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker Image
-      run: docker build . --file DockerfileNodeRed --tag zrxmoto/axnetlabs-node-red:$(date +%s)
+      run: docker build . --file DockerfileNodeRed --tag zrxmoto/axnetlabs-node-red:latest
       
     - name: Docker Push
       run: docker push zrxmoto/axnetlabs-node-red
