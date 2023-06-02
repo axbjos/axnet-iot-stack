@@ -1,0 +1,376 @@
+[
+    {
+        "id": "4f1a407d6e44972c",
+        "type": "tab",
+        "label": "UMN",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1922ddfa6773f0b5",
+        "type": "mqtt in",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "39e4fb73aa42796c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "fd515171c1c30e35",
+                "3d2f59250980a0f8"
+            ]
+        ]
+    },
+    {
+        "id": "fd515171c1c30e35",
+        "type": "debug",
+        "z": "4f1a407d6e44972c",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ad5b2b17003ef286",
+        "type": "inject",
+        "z": "4f1a407d6e44972c",
+        "name": "Send Dummy JSON Data for Testing",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"applicationID\":\"34\",\"applicationName\":\"axnet-iot-umn\",\"deviceName\":\"axnet-iot-umn-pressure\",\"devEUI\":\"LPfxISEAANE=\",\"rxInfo\":[{\"gatewayID\":\"LPfxERUgAAw=\",\"time\":\"2023-05-31T14:01:10.505724052Z\",\"timeSinceGPSEpoch\":null,\"rssi\":-82,\"loRaSNR\":10.5,\"channel\":3,\"rfChain\":0,\"board\":0,\"antenna\":0,\"location\":{\"latitude\":0,\"longitude\":0,\"altitude\":0,\"source\":\"UNKNOWN\",\"accuracy\":0},\"fineTimestampType\":\"NONE\",\"context\":\"QL9CXA==\",\"uplinkID\":\"sTCmRSohSDSnzvOHgpu/xg==\",\"crcStatus\":\"CRC_OK\"}],\"txInfo\":{\"frequency\":904500000,\"modulation\":\"LORA\",\"loRaModulationInfo\":{\"bandwidth\":125,\"spreadingFactor\":10,\"codeRate\":\"4/5\",\"polarizationInversion\":false}},\"adr\":true,\"dr\":0,\"fCnt\":208,\"fPort\":2,\"data\":\"AQUQSCTUBdHD\",\"objectJSON\":\"{\\\"err\\\":0,\\\"messages\\\":[{\\\"measurementId\\\":4101,\\\"measurementValue\\\":97789,\\\"type\\\":\\\"report_telemetry\\\"}],\\\"payload\\\":\\\"0105104824D405D1C3\\\",\\\"valid\\\":true}\",\"tags\":{},\"confirmedUplink\":true,\"devAddr\":\"ACFwmA==\"}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "fd515171c1c30e35",
+                "3d2f59250980a0f8"
+            ]
+        ]
+    },
+    {
+        "id": "904443b75c5a029e",
+        "type": "debug",
+        "z": "4f1a407d6e44972c",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3d2f59250980a0f8",
+        "type": "json",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "property": "payload.objectJSON",
+        "action": "obj",
+        "pretty": false,
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "a246c53bb73866ae"
+            ]
+        ]
+    },
+    {
+        "id": "a246c53bb73866ae",
+        "type": "change",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload.rxInfo",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.txInfo",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.data",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.adr",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.dr",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.fCnt",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.fPort",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.tags",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.confirmedUplink",
+                "pt": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload.objectJSON.messages[0].measurementId",
+                "pt": "msg",
+                "to": "payload.measurementId",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload.objectJSON.messages[0].measurementValue",
+                "pt": "msg",
+                "to": "payload.measurementValue",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 280,
+        "wires": [
+            [
+                "17e035fb2acd4dc9"
+            ]
+        ]
+    },
+    {
+        "id": "17e035fb2acd4dc9",
+        "type": "change",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload.objectJSON",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 280,
+        "wires": [
+            [
+                "904443b75c5a029e",
+                "bd9cd852631049cb"
+            ]
+        ]
+    },
+    {
+        "id": "bd9cd852631049cb",
+        "type": "mongodb out",
+        "z": "4f1a407d6e44972c",
+        "mongodb": "f31d2d9ba3bb06bc",
+        "name": "",
+        "collection": "stpaul_pressure",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 1220,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "7866a681034eda9a",
+        "type": "comment",
+        "z": "4f1a407d6e44972c",
+        "name": "Store Data in MongoDB",
+        "info": "",
+        "x": 1180,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "8c31b3905c0cb11f",
+        "type": "comment",
+        "z": "4f1a407d6e44972c",
+        "name": "Listen to all MQTT Topics",
+        "info": "",
+        "x": 150,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "aa2e18cbf5685fad",
+        "type": "comment",
+        "z": "4f1a407d6e44972c",
+        "name": "Modify the recieved JSON measurement data",
+        "info": "",
+        "x": 690,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "8902671f22c1e6eb",
+        "type": "mqtt in",
+        "z": "4f1a407d6e44972c",
+        "name": "Topic: UMN Pressure",
+        "topic": "/application/34/device/2cf7f121210000d1/event/up",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "39e4fb73aa42796c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "0815dde29568c49e"
+            ]
+        ]
+    },
+    {
+        "id": "48560efc0a0e4985",
+        "type": "mqtt in",
+        "z": "4f1a407d6e44972c",
+        "name": "Topic: UMN CO2",
+        "topic": "/application/34/device/2cf7f121210000b1/event/up",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "39e4fb73aa42796c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "0815dde29568c49e"
+            ]
+        ]
+    },
+    {
+        "id": "bb8f9c5dace9d682",
+        "type": "mqtt in",
+        "z": "4f1a407d6e44972c",
+        "name": "Topic: UMN Soil Moisture & Temp",
+        "topic": "/application/34/device/2cf7f1212100022c/event/up",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "39e4fb73aa42796c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 580,
+        "wires": [
+            [
+                "0815dde29568c49e"
+            ]
+        ]
+    },
+    {
+        "id": "0815dde29568c49e",
+        "type": "debug",
+        "z": "4f1a407d6e44972c",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "39e4fb73aa42796c",
+        "type": "mqtt-broker",
+        "name": "Axnet IoT Server Internal",
+        "broker": "209.73.89.49",
+        "port": "21883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f31d2d9ba3bb06bc",
+        "type": "mongodb",
+        "hostname": "mongodb",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "umn_sensor_data",
+        "name": ""
+    }
+]

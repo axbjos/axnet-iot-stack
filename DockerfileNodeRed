@@ -1,0 +1,12 @@
+FROM nodered/node-red:latest
+
+# copy package file that has dependencie
+#COPY package.json .
+# add mongodb connect
+#RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
+
+# install mongo connector
+RUN npm install --unsafe-perm --no-update-notifier --no-fund node-red-node-mongodb
+
+# UMN St. Paul Campus Testing Flows
+COPY flows.json /data/flows.json

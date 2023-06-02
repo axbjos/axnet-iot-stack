@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  node-red:
+    image: registry.msi.umn.edu/gems/axnetlabs-node-red:1.0.0  
+    restart: always
+    ports:
+      - "1880:1880"
+    networks:
+      - axnet-iot-net
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - axnet-iot-data-mongo:/data/db
+    networks:
+      - axnet-iot-net
+
+networks:
+  axnet-iot-net:
+
+volumes:
+  axnet-iot-data-mongo:
