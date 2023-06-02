@@ -15,9 +15,17 @@ services:
       - axnet-iot-data-mongo:/data/db
     networks:
       - axnet-iot-net
+  influxdb :configs:
+    image: influxdb
+    restart: always
+    volumes:
+      - axnet-iot-data-influx:/var/lib/influxdb2
+    networks:
+      - axnet-iot-net
 
 networks:
   axnet-iot-net:
 
 volumes:
   axnet-iot-data-mongo:
+  axnet-iot-data-influx:
