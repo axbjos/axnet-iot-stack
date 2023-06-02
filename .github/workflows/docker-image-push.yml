@@ -1,0 +1,25 @@
+name: Docker Image Push
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login to Docker
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PW}}
+      run:
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker Image
+      run: docker build . --file Dockerfile --tag zrxmoto/axnetlabs-node-red:$(date +%s)
+      
+    - name: Docker Push
+      run: docker push ${{secrets.DOCKER_HUB_USER}}/axnet-iot-stack
