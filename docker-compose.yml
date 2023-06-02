@@ -2,7 +2,7 @@ version: "3"
 
 services:
   node-red:
-    image: registry.msi.umn.edu/gems/axnetlabs-node-red:1.0.0  
+    image: zrxmoto/axnetlabs-node-red:latest  
     restart: always
     ports:
       - "1880:1880"
