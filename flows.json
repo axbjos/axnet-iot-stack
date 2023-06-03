@@ -45,6 +45,20 @@
         "name": ""
     },
     {
+        "id": "a344baf8dd383aa5",
+        "type": "influxdb",
+        "hostname": "influxdb",
+        "port": "8086",
+        "protocol": "http",
+        "database": "umn-sensor-data",
+        "name": "Local Influx",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "rejectUnauthorized": false
+    },
+    {
         "id": "1922ddfa6773f0b5",
         "type": "mqtt in",
         "z": "4f1a407d6e44972c",
@@ -101,7 +115,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"applicationID\":\"34\",\"applicationName\":\"axnet-iot-umn\",\"deviceName\":\"axnet-iot-umn-pressure\",\"devEUI\":\"LPfxISEAANE=\",\"rxInfo\":[{\"gatewayID\":\"LPfxERUgAAw=\",\"time\":\"2023-05-31T14:01:10.505724052Z\",\"timeSinceGPSEpoch\":null,\"rssi\":-82,\"loRaSNR\":10.5,\"channel\":3,\"rfChain\":0,\"board\":0,\"antenna\":0,\"location\":{\"latitude\":0,\"longitude\":0,\"altitude\":0,\"source\":\"UNKNOWN\",\"accuracy\":0},\"fineTimestampType\":\"NONE\",\"context\":\"QL9CXA==\",\"uplinkID\":\"sTCmRSohSDSnzvOHgpu/xg==\",\"crcStatus\":\"CRC_OK\"}],\"txInfo\":{\"frequency\":904500000,\"modulation\":\"LORA\",\"loRaModulationInfo\":{\"bandwidth\":125,\"spreadingFactor\":10,\"codeRate\":\"4/5\",\"polarizationInversion\":false}},\"adr\":true,\"dr\":0,\"fCnt\":208,\"fPort\":2,\"data\":\"AQUQSCTUBdHD\",\"objectJSON\":\"{\\\"err\\\":0,\\\"messages\\\":[{\\\"measurementId\\\":4101,\\\"measurementValue\\\":97789,\\\"type\\\":\\\"report_telemetry\\\"}],\\\"payload\\\":\\\"0105104824D405D1C3\\\",\\\"valid\\\":true}\",\"tags\":{},\"confirmedUplink\":true,\"devAddr\":\"ACFwmA==\"}",
+        "payload": "{\"applicationID\":\"34\",\"applicationName\":\"axnet-iot-umn\",\"deviceName\":\"axnet-iot-umn-dummy\",\"devEUI\":\"LPfxISEAANE=\",\"rxInfo\":[{\"gatewayID\":\"LPfxERUgAAw=\",\"time\":\"2023-05-31T14:01:10.505724052Z\",\"timeSinceGPSEpoch\":null,\"rssi\":-82,\"loRaSNR\":10.5,\"channel\":3,\"rfChain\":0,\"board\":0,\"antenna\":0,\"location\":{\"latitude\":0,\"longitude\":0,\"altitude\":0,\"source\":\"UNKNOWN\",\"accuracy\":0},\"fineTimestampType\":\"NONE\",\"context\":\"QL9CXA==\",\"uplinkID\":\"sTCmRSohSDSnzvOHgpu/xg==\",\"crcStatus\":\"CRC_OK\"}],\"txInfo\":{\"frequency\":904500000,\"modulation\":\"LORA\",\"loRaModulationInfo\":{\"bandwidth\":125,\"spreadingFactor\":10,\"codeRate\":\"4/5\",\"polarizationInversion\":false}},\"adr\":true,\"dr\":0,\"fCnt\":208,\"fPort\":2,\"data\":\"AQUQSCTUBdHD\",\"objectJSON\":\"{\\\"err\\\":0,\\\"messages\\\":[{\\\"measurementId\\\":4444,\\\"measurementValue\\\":10000,\\\"type\\\":\\\"report_telemetry\\\"}],\\\"payload\\\":\\\"0105104824D405D1C3\\\",\\\"valid\\\":true}\",\"tags\":{},\"confirmedUplink\":true,\"devAddr\":\"ACFwmA==\"}",
         "payloadType": "json",
         "x": 180,
         "y": 280,
@@ -311,7 +325,8 @@
         "y": 540,
         "wires": [
             [
-                "0815dde29568c49e"
+                "0815dde29568c49e",
+                "e2094f8466bf60da"
             ]
         ]
     },
@@ -332,7 +347,8 @@
         "y": 620,
         "wires": [
             [
-                "0815dde29568c49e"
+                "0815dde29568c49e",
+                "f80a8c5c9a54d3c1"
             ]
         ]
     },
@@ -353,7 +369,8 @@
         "y": 700,
         "wires": [
             [
-                "0815dde29568c49e"
+                "0815dde29568c49e",
+                "068845dfa864d777"
             ]
         ]
     },
@@ -369,8 +386,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 560,
-        "y": 620,
+        "x": 440,
+        "y": 360,
         "wires": []
     },
     {
@@ -382,5 +399,297 @@
         "x": 90,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "6c84f6735dcd6463",
+        "type": "influxdb out",
+        "z": "4f1a407d6e44972c",
+        "influxdb": "a344baf8dd383aa5",
+        "name": "",
+        "measurement": "barometric-pressure",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "AxnetLabs",
+        "bucket": "umn_sensor_measurements",
+        "x": 1190,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "03a60f50e2c822e5",
+        "type": "influxdb out",
+        "z": "4f1a407d6e44972c",
+        "influxdb": "a344baf8dd383aa5",
+        "name": "",
+        "measurement": "co2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1140,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "068845dfa864d777",
+        "type": "switch",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "property": "payload.measurementId",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "4102",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "4103",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 700,
+        "wires": [
+            [
+                "e4dbc08699c719d0"
+            ],
+            [
+                "980009d430ee0325"
+            ]
+        ]
+    },
+    {
+        "id": "78aa35c2d4c21564",
+        "type": "influxdb out",
+        "z": "4f1a407d6e44972c",
+        "influxdb": "a344baf8dd383aa5",
+        "name": "",
+        "measurement": "soil_moisture",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1170,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "df42e74cdf6390bd",
+        "type": "influxdb out",
+        "z": "4f1a407d6e44972c",
+        "influxdb": "a344baf8dd383aa5",
+        "name": "",
+        "measurement": "soil_temperature",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1180,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "8eb2d5bcb94c93ae",
+        "type": "http in",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "url": "/query-pressure",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 940,
+        "wires": [
+            [
+                "2ceb712bb830d06c"
+            ]
+        ]
+    },
+    {
+        "id": "2ceb712bb830d06c",
+        "type": "influxdb in",
+        "z": "4f1a407d6e44972c",
+        "influxdb": "a344baf8dd383aa5",
+        "name": "",
+        "query": "from(bucket:\"umn_sensor_measurements\") |> range(start: -20m)",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "AxnetLabs",
+        "x": 430,
+        "y": 940,
+        "wires": [
+            [
+                "b261042dbbe8e008"
+            ]
+        ]
+    },
+    {
+        "id": "b261042dbbe8e008",
+        "type": "http response",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "e2094f8466bf60da",
+        "type": "json",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "property": "payload.objectJSON",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 540,
+        "wires": [
+            [
+                "84dde88f4d396143"
+            ]
+        ]
+    },
+    {
+        "id": "84dde88f4d396143",
+        "type": "function",
+        "z": "4f1a407d6e44972c",
+        "name": "Extract Measurement Value in JSON",
+        "func": "msg.payload = msg.payload.objectJSON.messages[0].measurementValue\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 540,
+        "wires": [
+            [
+                "6c84f6735dcd6463"
+            ]
+        ]
+    },
+    {
+        "id": "f80a8c5c9a54d3c1",
+        "type": "json",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "property": "payload.objectJSON",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 620,
+        "wires": [
+            [
+                "d3983184e3182ce1"
+            ]
+        ]
+    },
+    {
+        "id": "d3983184e3182ce1",
+        "type": "function",
+        "z": "4f1a407d6e44972c",
+        "name": "Extract Measurement Value in JSON",
+        "func": "msg.payload = msg.payload.objectJSON.messages[0].measurementValue\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 620,
+        "wires": [
+            [
+                "03a60f50e2c822e5"
+            ]
+        ]
+    },
+    {
+        "id": "e4dbc08699c719d0",
+        "type": "json",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "property": "payload.objectJSON",
+        "action": "obj",
+        "pretty": false,
+        "x": 590,
+        "y": 680,
+        "wires": [
+            [
+                "6000ab69fceb2619"
+            ]
+        ]
+    },
+    {
+        "id": "6000ab69fceb2619",
+        "type": "function",
+        "z": "4f1a407d6e44972c",
+        "name": "Extract Measurement Value in JSON",
+        "func": "msg.payload = msg.payload.objectJSON.messages[0].measurementValue\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 680,
+        "wires": [
+            [
+                "78aa35c2d4c21564"
+            ]
+        ]
+    },
+    {
+        "id": "980009d430ee0325",
+        "type": "json",
+        "z": "4f1a407d6e44972c",
+        "name": "",
+        "property": "payload.objectJSON",
+        "action": "obj",
+        "pretty": false,
+        "x": 590,
+        "y": 740,
+        "wires": [
+            [
+                "5e561c9218e52c61"
+            ]
+        ]
+    },
+    {
+        "id": "5e561c9218e52c61",
+        "type": "function",
+        "z": "4f1a407d6e44972c",
+        "name": "Extract Measurement Value in JSON",
+        "func": "msg.payload = msg.payload.objectJSON.messages[0].measurementValue\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 740,
+        "wires": [
+            [
+                "df42e74cdf6390bd"
+            ]
+        ]
     }
 ]
