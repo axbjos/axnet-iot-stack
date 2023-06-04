@@ -7,7 +7,7 @@ FROM nodered/node-red:latest
 
 # install mongo connector
 RUN npm install --unsafe-perm --no-update-notifier --no-fund node-red-node-mongodb
-RUN npm install --unsafe-perm --no-update-notifier --no-fund n0de-red-contrib-influxdb
+RUN npm install --unsafe-perm --no-update-notifier --no-fund node-red-contrib-influxdb
 
 # UMN St. Paul Campus Testing Flows
 COPY flows.json /data/flows.json
