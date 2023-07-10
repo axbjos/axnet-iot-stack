@@ -10,21 +10,21 @@ services:
     ports:
       - "1880:1880"
     networks:
-      - axnet-iot-net
+      - pjfarms-net
   mongodb:
     image: mongo
     restart: always
     volumes:
       - axnet-iot-data-mongo:/data/db
     networks:
-      - axnet-iot-net
+      - pjfarms-net
   influxdb:
     image: influxdb
     restart: always
     volumes:
       - axnet-iot-data-influx:/var/lib/influxdb2
     networks:
-      - axnet-iot-net
+      - pjfarms-net
   web:
     image: zrxmoto/axnetlabs-pj-web:latest
     restart: always
@@ -36,7 +36,7 @@ services:
     #ports:
     #  - "80:80"
     networks:
-      - web
+      - pjfarms-net
 
   traefik:
     image: "traefik:v2.10"
@@ -61,10 +61,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
 networks:
-  axnet-iot-net:
-    external: false
-  web:
-    external: false
+  pjfarms-net:
 
 volumes:
   axnet-iot-data-mongo:
