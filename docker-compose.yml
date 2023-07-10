@@ -1,14 +1,19 @@
 version: "3"
 
 services:
-  node-red:
+  node:
     image: zrxmoto/axnetlabs-node-red:latest  
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.node.rule=Host(`pjfarmspineriver.com`)"
+      - "traefik.http.routers.node.entrypoints=nodesecure"
+      - "traefik.http.routers.node.tls.certresolver=myresolver"
     depends_on:
       - mongodb
       - influxdb
-    ports:
-      - "1880:1880"
+    #ports:
+    #  - "1880:1880"
     networks:
       - pjfarms-net
   mongodb:
@@ -30,9 +35,9 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`pjfarmspineriver.com`)"
-      - "traefik.http.routers.whoami.entrypoints=websecure"
-      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
+      - "traefik.http.routers.web.rule=Host(`pjfarmspineriver.com`)"
+      - "traefik.http.routers.web.entrypoints=websecure"
+      - "traefik.http.routers.web.tls.certresolver=myresolver"
     #ports:
     #  - "80:80"
     networks:
@@ -47,15 +52,16 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.nodesecure.address=:1880"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesresolvers.myresolver.acme.email=joeaxberg@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "443:443"
-      - "80:80"
+      - "1880:1880"
     networks:
-      - web
+      - pjfarms-net
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
