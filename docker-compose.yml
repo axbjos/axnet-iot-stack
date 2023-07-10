@@ -64,7 +64,7 @@ networks:
   axnet-iot-net:
     external: false
   web:
-    external: true
+    external: false
 
 volumes:
   axnet-iot-data-mongo:

@@ -1,0 +1,19 @@
+{
+  "myresolver": {
+    "Account": {
+      "Email": "joeaxberg@gmail.com",
+      "Registration": {
+        "body": {
+          "status": "valid",
+          "contact": [
+            "mailto:joeaxberg@gmail.com"
+          ]
+        },
+        "uri": "https://acme-v02.api.letsencrypt.org/acme/acct/1200399307"
+      },
+      "PrivateKey": "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",
+      "KeyType": "4096"
+    },
+    "Certificates": null
+  }
+}
