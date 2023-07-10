@@ -37,6 +37,7 @@ services:
     #  - "80:80"
     networks:
       - axnet-iot-net
+      - web
 
   traefik:
     image: "traefik:v2.10"
@@ -62,6 +63,9 @@ services:
 
 networks:
   axnet-iot-net:
+    external: false
+  web:
+    external: true
 
 volumes:
   axnet-iot-data-mongo:
