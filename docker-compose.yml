@@ -55,7 +55,7 @@ services:
       - "443:443"
       - "80:80"
     networks:
-      -axnet-iot-net
+      - axnet-iot-net
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
