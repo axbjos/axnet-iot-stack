@@ -4,6 +4,9 @@ services:
   node-red:
     image: zrxmoto/axnetlabs-node-red:latest  
     restart: always
+    depends_on:
+      - mongodb
+      - influxdb
     ports:
       - "1880:1880"
     networks:
@@ -22,6 +25,9 @@ services:
       - axnet-iot-data-influx:/var/lib/influxdb2
     networks:
       - axnet-iot-net
+  web:
+    image: zrxmoto/axnetlabs-pj-web:latest
+    restart: always
 
 networks:
   axnet-iot-net:
