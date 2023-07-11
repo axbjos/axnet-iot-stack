@@ -6,7 +6,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.node.rule=Host(`pjfarmspineriver.com`)"
+      - "traefik.http.routers.node.rule=Host(`${AXNET_STACK_ENV}`)"
       - "traefik.http.routers.node.entrypoints=nodesecure"
       - "traefik.http.routers.node.tls.certresolver=myresolver"
     depends_on:
@@ -35,7 +35,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`pjfarmspineriver.com`)"
+      - "traefik.http.routers.web.rule=Host(`${AXNET_STACK_ENV}`)"
       - "traefik.http.routers.web.entrypoints=websecure"
       - "traefik.http.routers.web.tls.certresolver=myresolver"
     #ports:
