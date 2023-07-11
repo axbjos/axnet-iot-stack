@@ -37,7 +37,7 @@
     {
         "id": "f31d2d9ba3bb06bc",
         "type": "mongodb",
-        "hostname": "mongodb",
+        "hostname": "localhost",
         "topology": "direct",
         "connectOptions": "",
         "port": "27017",
